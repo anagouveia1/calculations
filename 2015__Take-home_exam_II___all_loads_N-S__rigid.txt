@@ -1,0 +1,481 @@
+strudl ' 2015 Take-home Exam II  All loads four story rigid steel frame Rigid in N-s   S. Faraji'                                                                    
+                                                                                                                                                                              
+units kips ft
+
+type plane frame
+
+generate 5 joints id 1 inc 1 x 0.0 y diff 0.0 10.0 3 at 11.5
+
+generate 5 joints id 6 inc 1 x 45.0 y diff 0.0 10.0 3 at 11.5
+
+generate 5 joints id 11 inc 1 x 90.0 y diff 0.0 10.0 3 at 11.5
+
+generate 5 joints id 16 inc 1 x 135.0 y diff 0.0 10.0 3 at 11.5
+
+$generate girders
+
+generate 3 members id 'G1'  inc 1 from 2 inc 5 to 7  inc 5
+
+generate 3 members id 'G4'  inc 1 from 3 inc 5 to 8  inc 5
+
+generate 3 members id 'G7'  inc 1 from 4 inc 5 to 9  inc 5
+
+generate 3 members id 'G10' inc 1 from 5 inc 5 to 10 inc 5
+
+$generate columns
+
+generate 4 members id 'C1' inc 1 from 1 inc 1 to 2 inc 1
+
+generate 4 members id 'C5' inc 1 from 6 inc 1 to 7 inc 1
+
+generate 4 members id 'C9' inc 1 from 11 inc 1 to 12 inc 1
+
+generate 4 members id 'C13' inc 1 from 16 inc 1 to 17 inc 1
+
+unit inch
+
+constants
+
+E 29000
+
+$ steel density .49kip/ft3
+
+density .0002835
+
+member properties
+
+'G1' to 'G9' ax 16.2 iz 890.
+
+'G10' to 'G12' ax 16.2 iz 1140.
+
+'C1' to 'C16' ax 15.8 iz 303.
+
+unit feet
+
+status support joints 1 6 11 16
+
+joint releases
+
+1 6 11 16 moment z
+
+dead load 1 direction -y
+
+Loading 11 ' DL'
+
+member loads
+
+'G10' to  'G12'    force y global uniform w -1.6
+
+'G1'  to  'G9' 	   force y global uniform w -1.6
+
+Loading 21 ' wind N-S '
+
+joint loads
+
+2 force x 4.5
+
+3 force x 5
+
+4 force x 5
+
+5 force x 3
+
+Loading 22 ' wind S-N '
+
+joint loads
+
+17 force x -4.5
+
+18 force x -5
+
+19 force x -5
+
+20 force x -3
+
+Loading 31    ' LL all floor spans'
+
+member loads
+
+'G1'  to  'G9' 	   force y global uniform w -2.56
+
+
+Loading 32    ' Lr all roof spans'
+
+member loads
+
+'G10' to  'G12'	   force y global uniform w -.96
+
+Loading 41   ' LL positive moment I- floors'
+
+member loads
+
+'G2' 'G4' 'G6'  'G8'	   force y global uniform w -2.56
+
+Loading 42   ' Lr positive moment I -roof'
+
+member loads
+
+'G10'   'G12' 	   	   force y global uniform w -.96
+
+Loading 51 ' LL positive II- floors'
+
+member loads
+
+'G1' 'G3' 'G5' 'G7' 'G9'	   force y global uniform w -2.56
+
+Loading 52   ' Lr positive moment II -roof'
+
+member loads
+
+'G11'	   			   force y global uniform w -.96
+
+Loading 61 ' LL Negative I- floors'
+
+member loads
+
+'G1' 'G3' 'G5' 'G7' 'G9'	   force y global uniform w -2.56
+
+Loading 62 ' Lr Negative I- roof'
+
+member loads
+
+'G10' 'G11'	   force y global uniform w -.96
+
+Loading 64 ' Lr Negative Ia- roof'
+
+member loads
+
+'G12' 'G11'	   force y global uniform w -.96
+
+Loading 71 ' LL Negative II- floors'
+
+member loads
+
+'G2' 'G4' 'G6' 'G7' 'G8'	   force y global uniform w -2.56
+
+Loading 72 ' Lr Negative II- roof'
+
+member loads
+
+'G10' 'G12'	   force y global uniform w -.96
+
+Loading 73 ' LL Negative IIa- floors'
+
+member loads
+
+'G2' 'G4' 'G6' 'G9' 'G8'	   force y global uniform w -2.56
+
+Loading 81 ' LL Negative III- floors'
+
+member loads
+
+'G1' 'G3' 'G4' 'G5' 'G7' 'G9'	   force y global uniform w -2.56
+
+Loading 82 ' Lr Negative III- roof'
+
+member loads
+
+'G11'	   force y global uniform w -.96
+
+Loading 83 ' LL Negative IIIa- floors'
+
+member loads
+
+'G1' 'G3' 'G6' 'G5' 'G7' 'G9'	   force y global uniform w -2.56
+
+Loading 91 ' LL Negative  VI- floors'
+
+member loads
+
+'G1' 'G2' 'G4' 'G6' 'G8' force y global uniform w -2.56
+
+Loading 92 ' Lr Negative VI- roof'
+
+member loads
+
+'G10' 'G12'	   force y global uniform w -.96
+
+Loading 93 ' LL Negative  VIa- floors'
+
+member loads
+
+'G3' 'G2' 'G4' 'G6' 'G8' force y global uniform w -2.56
+
+Loading 101 ' LL Axial I- floors'
+
+member loads
+
+'G2' 'G3' 'G5' 'G6' 'G8' 'G9'	   force y global uniform w -2.56
+
+Loading 102 ' Lr Axial I- roof'
+
+member loads
+
+'G11' 'G12'	   force y global uniform w -.96
+
+Loading 111 ' LL Axial II- floors'
+
+member loads
+
+'G1' 'G2' 'G4' 'G5' 'G7'  'G8'	   force y global uniform w -2.56
+
+Loading 112 ' Lr Axial II- roof'
+
+member loads
+
+'G10' 'G11'	   force y global uniform w -.96
+
+$ AISC Fourtheenth Edition  LRFD Load  Combinations
+
+$$ AISC (1)  1.4D
+
+form load 191 from 1 1.4  11  1.4
+
+form load 192 from 1 1.4  11  1.4
+
+$$AISC (2) 1.2D + 1.6L+ (0.5 Snow or 0.5Lr or R)
+
+form load 201 from 1   1.2  11 1.2       31   1.6   32   .5
+
+form load 202 from 1   1.2  11 1.2       41   1.6   42   .5
+
+form load 203 from 1   1.2  11 1.2        51   1.6  52   .5
+
+form load 204 from 1   1.2  11 1.2        61   1.6   62   .5
+
+form load 205 from 1   1.2  11 1.2        61   1.6   64   .5
+
+form load 206 from 1   1.2  11 1.2        71   1.6   72   .5
+
+form load 207 from 1   1.2  11 1.2        71   1.6   73   .5
+
+form load 208 from 1   1.2  11 1.2        81   1.6   82   .5
+
+form load 209 from 1   1.2  11 1.2        81   1.6   83   .5
+
+form load 210 from 1   1.2  11 1.2        91   1.6   92   .5
+
+form load 211 from 1   1.2  11 1.2        91   1.6   93   .5
+
+form load 212 from 1   1.2  11 1.2        101   1.6  102  .5
+
+form load 213 from 1   1.2  11 1.2        111   1.6  112  .5
+
+$$ AISC(3)  1.2D + (1.6Snow or 1.6Lr or 1.6R) + (.5L or 0.8W)
+
+form load 301 from 1  1.2  11 1.2       31  .5  32  1.6
+
+form load 302 from 1  1.2  11 1.2       41  .5  42  1.6
+
+form load 303 from 1  1.2  11 1.2       51  .5  52  1.6
+
+form load 304 from 1  1.2  11 1.2       61  .5  62  1.6
+
+form load 305 from 1  1.2  11 1.2       61  .5  64  1.6
+
+form load 306 from 1  1.2  11 1.2       71  .5  72  1.6
+
+form load 307 from 1  1.2  11 1.2       73  .5  72  1.6
+
+form load 308 from 1  1.2  11 1.2       81  .5  82  1.6
+
+form load 309 from 1  1.2  11 1.2       83  .5  82  1.6
+
+form load 310 from 1  1.2  11 1.2       91  .5  92  1.6
+
+form load 311 from 1  1.2  11 1.2       93  .5  92  1.6
+
+form load 312 from 1  1.2  11 1.2       101 .5 102  1.6
+
+form load 313 from 1  1.2  11 1.2       111 .5 112  1.6
+$
+
+form load 314 from 1  1.2  11 1.2       21  .8  32  1.6
+
+form load 315 from 1  1.2  11 1.2       21  .8  42  1.6
+
+form load 316 from 1  1.2  11 1.2       21  .8  52  1.6
+
+form load 317 from 1  1.2  11 1.2       21  .8  62  1.6
+
+form load 318 from 1  1.2  11 1.2       21  .8  64  1.6
+
+form load 319 from 1  1.2  11 1.2       21  .8  72  1.6
+
+$
+
+form load 320 from 1  1.2  11 1.2       21  .8  82  1.6
+
+$
+
+form load 321 from 1  1.2  11 1.2       21  .8  92  1.6
+
+$
+
+form load 322 from 1  1.2  11 1.2       21  .8 102  1.6
+
+form load 323 from 1  1.2  11 1.2       21  .8 112  1.6
+
+$
+
+form load 324 from 1  1.2  11 1.2       22  .8  32  1.6
+
+form load 325 from 1  1.2  11 1.2       22  .8  42  1.6
+
+form load 326 from 1  1.2  11 1.2       22  .8  52  1.6
+
+$
+
+form load 327 from 1  1.2  11 1.2       22  .8  62  1.6
+
+form load 328 from 1  1.2  11 1.2       22  .8  64  1.6
+
+$
+
+form load 329 from 1  1.2  11 1.2       22  .8  72  1.6
+
+form load 330 from 1  1.2  11 1.2       22  .8  82  1.6
+
+form load 331 from 1  1.2  11 1.2       22  .8  92  1.6
+
+form load 332 from 1  1.2  11 1.2       22  .8 102  1.6
+
+form load 333 from 1  1.2  11 1.2       22  .8 112  1.6
+
+$
+
+$$ AISC(4)  1.2D +1.0 W + 0.5L + (0.5Snow or 0.5Lr or 0.5 R)
+
+form load 401  from 1  1.2  11 1.2       21  1.0  31  .5  32 .5  
+
+form load 402  from 1  1.2  11 1.2       21  1.0  41  .5  42 .5
+
+form load 403  from 1  1.2  11 1.2       21  1.0  51  .5  52 .5
+
+$  
+
+form load 404  from 1  1.2  11 1.2       21  1.0  61  .5  62 .5
+
+form load 405  from 1  1.2  11 1.2       21  1.0  61  .5  64 .5
+
+$
+
+form load 406  from 1  1.2  11 1.2       21  1.0  71  .5  72 .5
+
+form load 407  from 1  1.2  11 1.2       21  1.0  73  .5  72 .5
+
+$  
+
+form load 408  from 1  1.2  11 1.2       21  1.0  81  .5  82 .5
+
+form load 409  from 1  1.2  11 1.2       21  1.0  83  .5  82 .5
+
+$
+
+form load 410  from 1  1.2  11 1.2       21  1.0  91  .5  92 .5
+
+form load 411  from 1  1.2  11 1.2       21  1.0  93  .5  92 .5
+
+$  
+
+form load 412  from 1  1.2  11 1.2       21  1.0  101  .5 102 .5
+
+form load 413  from 1  1.2  11 1.2       21  1.0  111  .5 112 .5
+
+$$
+
+form load 414  from 1  1.2  11 1.2       22  1.0  31  .5  32 .5  
+
+form load 415  from 1  1.2  11 1.2       22  1.0  41  .5  42 .5
+
+form load 416  from 1  1.2  11 1.2       22  1.0  51  .5  52 .5
+
+$  
+
+form load 417  from 1  1.2  11 1.2       22  1.0  61  .5  62 .5
+
+form load 418  from 1  1.2  11 1.2       22  1.0  61  .5  64 .5
+
+$
+
+form load 419  from 1  1.2  11 1.2       22  1.0  71  .5  72 .5
+
+form load 420  from 1  1.2  11 1.2       22  1.0  73  .5  72 .5
+
+$  
+
+form load 421  from 1  1.2  11 1.2       22  1.0  81  .5  82 .5
+
+form load 422  from 1  1.2  11 1.2       22  1.0  83  .5  82 .5
+
+$
+
+form load 423  from 1  1.2  11 1.2       22  1.0  91  .5  92 .5
+
+form load 424  from 1  1.2  11 1.2       22  1.0  93  .5  92 .5
+
+$  
+
+form load 425  from 1  1.2  11 1.2       22  1.0  101  .5 102 .5
+
+form load 426  from 1  1.2  11 1.2       22  1.0  111  .5 112 .5
+
+$
+
+$ AISC(5) 1.2D +E +.5L + .2Snow
+
+$ AISC(6) 0.9D + (1.0W)
+
+form load 601 from 1 .9  11 .9  21   1.0  
+
+form load 602 from 1 .9  11 .9  22   1.0
+
+$ AISC(7) 0.9D + (1.0E)
+
+$$$$$$$$$$$$$$$$
+
+section fract NS 5 0.0 0.4 0.5 .7  1.0 members 'G1' to 'G12'  
+
+section fract NS 2 0.0   1.0 members  'C1' to 'C16'
+
+Load list  191 to 192 201 to 213  301 to 333  401 to 426   601 to  602 
+
+unit feet
+
+nonlinear effect
+
+geometry all members
+
+maxi number of cycles
+
+convergence tolerance disp .001
+
+nonlinear analysis
+
+output decimal 3
+
+list reactions
+
+list force envelope members 'G1' to 'G12'  'C1' to 'C16'
+
+list forces members 'G1' to 'G12'  'C1' to 'C16'
+
+form load 1001 from 1 1.0  11  1.0
+
+form load 1002 from  31 1.0
+
+form load 1003 from 21 1.0
+
+form load 1004 from 1 1.0  11  1.0 31 1.0
+
+form load 1005 from 1 1.0  11  1.0 31 1.0 21 1.0
+
+load list 1001 1002 1003 1004 1005
+
+stiffness analysis
+
+unit inches
+
+list displacements
+
+list section displacements
